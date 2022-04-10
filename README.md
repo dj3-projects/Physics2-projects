@@ -1,1 +1,1 @@
-# Physics2-projects
+# parabolic-motion-simulation
