@@ -20,6 +20,8 @@ screen_height = 1080
 
 # screen_width x screen_height 사이즈의 스크린 표면을 만듦
 screen = pygame.display.set_mode((screen_width, screen_height))
+screen.fill(WHITE)
+pygame.display.update()
 
 clock = pygame.time.Clock()
 
