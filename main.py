@@ -3,6 +3,14 @@ from pygame.locals import *
 import math
 
 
+# 색상 상수
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+
 pygame.init()
 pygame.display.set_caption("포물선 운동 시뮬레이션")
 
