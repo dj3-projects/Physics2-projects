@@ -10,6 +10,7 @@ from matplotlib.figure import Figure
 root = Tk()
 root.title("포물선 운동 시뮬레이션")
 root.geometry("1080x720")
+root.state("zoomed")
 
 
 root.mainloop()
