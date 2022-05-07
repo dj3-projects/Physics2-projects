@@ -20,4 +20,10 @@ input_frame = Frame(root, width=230, relief="solid", bd=2, bg="white")
 input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
 
 
+root.grid_rowconfigure(0, weight=1)
+root.grid_rowconfigure(1, weight=1)
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(1, weight=1)
+
+
 root.mainloop()
