@@ -16,5 +16,8 @@ graph_frame.grid(row=0, column=0, rowspan=2, columnspan=2, sticky="nsew")
 info_frame = Frame(root, width=230, bg="white")
 info_frame.grid(row=0, column=2, columnspan=2, sticky="nsew")
 
+input_frame = Frame(root, width=230, relief="solid", bd=2, bg="white")
+input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
+
 
 root.mainloop()
