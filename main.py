@@ -47,6 +47,14 @@ lb_bh.grid(row=2, column=0, pady=15)
 e_bh.grid(row=2, column=1, pady=15)
 lb_bhu.grid(row=2, column=2, pady=15)
 
+# 공이 날라간 거리 레이블 & 엔트리
+lb_br = Label(info_frame, text="      거리 :", bg="white", font=(None, 15))
+e_br = Entry(info_frame, width=6, bg="white", bd=0, justify="right", font=(None, 15))
+lb_bru = Label(info_frame, text="m", bg="white", font=(None, 15))
+lb_br.grid(row=3, column=0, pady=15)
+e_br.grid(row=3, column=1, pady=15)
+lb_bru.grid(row=3, column=2, pady=15)
+
 
 # 각 프레임의 크기를 창 크기가 변할때 같이 일정하게 변하도록함
 root.grid_rowconfigure(0, weight=1)
