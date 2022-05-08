@@ -81,6 +81,20 @@ lb_mgu.grid(row=2, column=2, pady=20)
 # 기본적으로 중력 가속도 값을 입력해줌
 e_mg.insert(0, 9.806)
 
+# 사용자 지정 값 입력 버튼
+button = Button(
+    input_frame,
+    text="확인",
+    width=10,
+    height=2,
+    relief="ridge",
+    overrelief="solid",
+    bg="white",
+    activebackground="white",
+    font=(None, 15),
+)
+button.grid(row=3, column=0, columnspan=3, pady=20)
+
 
 # 각 프레임의 크기를 창 크기가 변할때 같이 일정하게 변하도록함
 root.grid_rowconfigure(0, weight=1)
