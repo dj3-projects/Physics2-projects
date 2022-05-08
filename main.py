@@ -23,6 +23,16 @@ input_frame = Frame(root, width=230, relief="solid", bd=2, bg="white")
 input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
 
 
+# (발사 후 흐른) 시간 레이블 & 엔트리
+lb_t = Label(info_frame, text="      시간 :", bg="white", font=(None, 15))
+e_t = Entry(info_frame, width=6, bg="white", bd=0, justify="right", font=(None, 15))
+lb_tu = Label(info_frame, text=" s", bg="white", font=(None, 15))
+lb_t.grid(row=0, column=0, pady=15)
+e_t.grid(row=0, column=1, pady=15)
+lb_tu.grid(row=0, column=2, pady=15)
+
+
+# 각 프레임의 크기를 창 크기가 변할때 같이 일정하게 변하도록함
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
