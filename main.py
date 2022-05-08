@@ -55,6 +55,14 @@ lb_br.grid(row=3, column=0, pady=15)
 e_br.grid(row=3, column=1, pady=15)
 lb_bru.grid(row=3, column=2, pady=15)
 
+# (공의) 발사(초기)속도 레이블 & 엔트리
+lb_v0 = Label(input_frame, text=" 발사속도 :", bg="white", font=(None, 15))
+e_v0 = Entry(input_frame, width=6, bg="white", bd=0, justify="right", font=(None, 15))
+lb_v0u = Label(input_frame, text="m/s", bg="white", font=(None, 15))
+lb_v0.grid(row=0, column=0, pady=15)
+e_v0.grid(row=0, column=1, pady=15)
+lb_v0u.grid(row=0, column=2, pady=15)
+
 
 # 각 프레임의 크기를 창 크기가 변할때 같이 일정하게 변하도록함
 root.grid_rowconfigure(0, weight=1)
