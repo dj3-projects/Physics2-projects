@@ -63,6 +63,14 @@ lb_v0.grid(row=0, column=0, pady=15)
 e_v0.grid(row=0, column=1, pady=15)
 lb_v0u.grid(row=0, column=2, pady=15)
 
+# (공의) 발사각도 레이블 & 엔트리
+lb_ang = Label(input_frame, text=" 발사각도 :", bg="white", font=(None, 15))
+e_ang = Entry(input_frame, width=6, bg="white", bd=0, justify="right", font=(None, 15))
+lb_angu = Label(input_frame, text="°", bg="white", font=(None, 15))
+lb_ang.grid(row=1, column=0, pady=15)
+e_ang.grid(row=1, column=1, pady=15)
+lb_angu.grid(row=1, column=2, pady=15)
+
 
 # 각 프레임의 크기를 창 크기가 변할때 같이 일정하게 변하도록함
 root.grid_rowconfigure(0, weight=1)
