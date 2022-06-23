@@ -12,6 +12,16 @@ root.title("포물선 운동 시뮬레이션")
 root.geometry("1080x720")
 
 
+# 포물선 계산 함수
+def para_clac():
+    pass
+
+
+# 실시간으로 포물선을 그리는 함수
+def para_plot():
+    pass
+
+
 # 그래프가 출력될 프레임
 graph_frame = Frame(root, relief="solid", bd=3, bg="white")
 graph_frame.grid(row=0, column=0, rowspan=2, columnspan=2, sticky="nsew")
