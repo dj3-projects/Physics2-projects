@@ -1,4 +1,5 @@
 from tkinter import *
+from ctypes import windll
 import numpy as np
 from matplotlib import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -9,7 +10,22 @@ from matplotlib.figure import Figure
 
 root = Tk()
 root.title("포물선 운동 시뮬레이션")
-root.geometry("1080x720")
+
+# 해상도 구하기
+width_px = root.winfo_screenwidth()
+user32 = windll.user32
+user32.SetProcessDPIAware()
+[w, h] = [user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)]
+
+# 해상도에 따라 창크기 맞춤
+if w == 3840 and h == 2160:
+    root.geometry("2560x1440")
+
+elif w == 2560 and h == 1440:
+    root.geometry("1920x1080")
+
+else:
+    root.geometry("1280x720")
 
 
 # 포물선 계산 함수
