@@ -18,10 +18,10 @@ user32.SetProcessDPIAware()
 [w, h] = [user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)]
 
 # 해상도에 따라 창크기 맞춤
-if w == 3840 and h == 2160:
+if w == 3840:
     root.geometry("2560x1440")
 
-elif w == 2560 and h == 1440:
+elif w == 2560:
     root.geometry("1920x1080")
 
 else:
