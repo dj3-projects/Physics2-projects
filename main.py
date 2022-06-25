@@ -29,8 +29,19 @@ else:
 
 
 # 포물선 계산 함수
-def para_clac():
-    pass
+def para_clac(parax, paray, v):
+    v0 = 0
+    ang = int(e_ang.get())
+    mg = int(e_mg.get())
+    t = int(e_t.get())
+    ux = v0 * np.cos(ang)
+    uy = v0 * np.sin(ang) - mg * t
+    v = (ux**2 + uy**2) ** 2 / 1
+    parax = v0 * np.cos(ang) * t
+    paray = v0 * np.sin(ang) * t - 2 / 1 * mg * t**2
+    f"{v:.3f} / {parax:.3f} / {paray:.3f}"
+
+    return parax, paray, v
 
 
 # 실시간으로 포물선을 그리는 함수
