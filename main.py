@@ -35,7 +35,7 @@ def para_plot():
     mg = float(e_mg.get())
 
     t_flight = 2 * v0 * np.sin(ang) / mg
-    t = np.linspace(0, t_flight, 100)
+    t = np.linspace(0, t_flight, 100, dtype=float)
 
     while True:
         ux = float(v0 * np.cos(ang))
@@ -46,6 +46,9 @@ def para_plot():
 
         parax = round(float(v0 * np.cos(ang) * t), 3)
         paray = round(float(v0 * np.sin(ang) * t - 0.5 * mg * t**2), 3)
+
+        if t == t_flight:
+            break
 
 
 # 그래프가 출력될 프레임
