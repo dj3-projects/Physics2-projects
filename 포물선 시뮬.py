@@ -1,14 +1,14 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 import numpy as np
 import math
 
 
-# Env physics
-g = 9.81
+# 물리값 기본 설정
+g = 9.81 
 dt = 0.1
-t = 0
+t = 0 
 
-angle = np.array([15, 30, 45, 60])
+angle = np.array([15, 30, 45, 60]) # 각도 설정
 throw_v = 20
 trajectories = [[(0,0)] for _ in range(len(angle))]
 dones = np.zeros_like(angle, dtype=np.bool)
@@ -28,15 +28,15 @@ while(not all_done):
     ax.scatter(x,y, label=angle[i])
   ax.legend()
 
-  t = t + dt
+  t = t + dt # 총 시간 = 처음 시간 + 변화한 시간
 
   for i in range(len(angle)):
     last_x, last_y = trajectories[i][-1]
     w = angle[i]
 
-    next_x, next_y = last_x + throw_v*math.cos(w/180 *3.14), last_y + throw_v*math.sin(w/180 *3.14) - g * t
+    next_x, next_y = last_x + throw_v*math.cos(w/180 *3.14), last_y + throw_v*math.sin(w/180 *3.14) - g * t # 포물선 운동 계산식
 
-    if next_y <= 0:
+    if next_y <= 0: # y 0 도달시 종료 
       dones[i] = True
       continue
 
