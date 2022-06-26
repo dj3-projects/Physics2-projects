@@ -28,25 +28,24 @@ else:
     root.geometry("1280x720")
 
 
-# 포물선 계산 함수
-def para_clac(parax, paray, v):
-    v0 = 0
-    ang = int(e_ang.get())
-    mg = int(e_mg.get())
-    t = int(e_t.get())
-    ux = v0 * np.cos(ang)
-    uy = v0 * np.sin(ang) - mg * t
-    v = (ux**2 + uy**2) ** 2 / 1
-    parax = v0 * np.cos(ang) * t
-    paray = v0 * np.sin(ang) * t - 2 / 1 * mg * t**2
-    f"{v:.3f} / {parax:.3f} / {paray:.3f}"
-
-    return parax, paray, v
-
-
 # 실시간으로 포물선을 그리는 함수
 def para_plot():
-    pass
+    v0 = float(e_v0.get())
+    ang = np.deg2rad(int(e_ang.get()))
+    mg = float(e_mg.get())
+
+    t_flight = 2 * v0 * np.sin(ang) / mg
+    t = np.linspace(0, t_flight, 100)
+
+    while True:
+        ux = float(v0 * np.cos(ang))
+        uy = float(v0 * np.sin(ang) - mg * t)
+        e_v.delete(0, "end")
+        v = round(float((ux**2 + uy**2) ** 0.5), 3)
+        e_v.insert(0, v)
+
+        parax = round(float(v0 * np.cos(ang) * t), 3)
+        paray = round(float(v0 * np.sin(ang) * t - 0.5 * mg * t**2), 3)
 
 
 # 그래프가 출력될 프레임
@@ -131,6 +130,7 @@ button = Button(
     bg="white",
     activebackground="white",
     font=(None, 15),
+    command=para_plot,
 )
 button.grid(row=3, column=0, columnspan=3, pady=20)
 
