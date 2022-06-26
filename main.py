@@ -1,5 +1,8 @@
+from sys import setrecursionlimit
 from tkinter import *
+import time
 from ctypes import windll
+from matplotlib.pyplot import clf, ion, subplots, xlim, ylim
 import numpy as np
 from matplotlib import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -7,6 +10,9 @@ from matplotlib import font_manager, rc
 import matplotlib.font_manager as fm
 from matplotlib.animation import FuncAnimation
 from matplotlib.figure import Figure
+
+
+setrecursionlimit(10**6)
 
 
 # matplotlib font 설정
@@ -37,27 +43,65 @@ else:
     root.geometry("1280x720")
 
 
-# 실시간으로 포물선을 그리는 함수
-def para_plot():
+def para_clac():
+    global v0, ang, mg, r, h, t
+
     v0 = float(e_v0.get())
     ang = np.deg2rad(int(e_ang.get()))
     mg = float(e_mg.get())
 
+    r = int(v0**2 * np.sin(2 * ang) / mg)
+    h = int(v0**2 * (np.sin(ang)) ** 2 / 2 * mg)
+
     t_flight = 2 * v0 * np.sin(ang) / mg
     t = np.linspace(0, t_flight, 100, dtype=float)
 
-    while True:
+
+# 실시간으로 포물선을 그리는 함수
+def para_plot(n):
+    global line, canvas
+
+    dt = 0
+
+    if n == 0:
+        para_clac()
+
+        xlim(0, r + 2)
+        ylim(0, h + 2)
+
+        figure.canvas.draw()
+        figure.canvas.flush_events()
+
+    if dt != t[98]:
+        e_t.delete(0, "end")
+        dt = t[n]
+        e_t.insert(0, dt)
+
         ux = float(v0 * np.cos(ang))
-        uy = float(v0 * np.sin(ang) - mg * t)
+        uy = v0 * np.sin(ang) - mg * dt
+
         e_v.delete(0, "end")
-        v = round(float((ux**2 + uy**2) ** 0.5), 3)
+        v = np.round(((ux**2 + uy**2) ** 0.5), 3)
         e_v.insert(0, v)
 
-        parax = round(float(v0 * np.cos(ang) * t), 3)
-        paray = round(float(v0 * np.sin(ang) * t - 0.5 * mg * t**2), 3)
+        parax = np.round((v0 * np.cos(ang) * dt), 3)
+        paray = np.round((v0 * np.sin(ang) * dt - 0.5 * mg * dt**2), 3)
 
-        if t == t_flight:
-            break
+        line.set_data(parax, paray)
+
+        figure.canvas.draw()
+
+        figure.canvas.flush_events()
+        time.sleep(0.1)
+
+        para_plot(n + 1)
+
+    if dt == t[99]:
+        return
+
+
+def plot():
+    para_plot(0)
 
 
 # 그래프가 출력될 프레임
@@ -74,21 +118,27 @@ input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
 
 
 # 그래프
-fig = Figure()
+# fig = Figure()
 
-ax = fig.add_subplot()
+figure, ax = subplots()
 ax.set_title("포물선 운동 시물레이션", fontproperties=fontprop, fontsize=30)
 ax.set_xlabel("x", fontsize=20)
 ax.set_ylabel("y", fontsize=20)
 
-canvas = FigureCanvasTkAgg(fig, master=graph_frame)
-canvas.draw()
+figure.canvas = FigureCanvasTkAgg(figure, master=graph_frame)
+figure.canvas.draw()
 
-toolbar = NavigationToolbar2Tk(canvas, graph_frame, pack_toolbar=False)
+toolbar = NavigationToolbar2Tk(figure.canvas, graph_frame, pack_toolbar=False)
 toolbar.update()
 
 toolbar.grid(row=1, column=0, sticky="nsew")
-canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
+figure.canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
+
+(line,) = ax.plot([], [])
+
+ion()
+# ani = FuncAnimation(fig, para_plot, frames=60, interval=20)
+# canvas.draw()
 
 
 # (발사 후 흐른) 시간 레이블 & 엔트리
@@ -160,7 +210,7 @@ button = Button(
     bg="white",
     activebackground="white",
     font=(None, 15),
-    command=para_plot,
+    command=plot,
 )
 button.grid(row=3, column=0, columnspan=3, pady=20)
 
