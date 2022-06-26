@@ -2,7 +2,7 @@ from sys import setrecursionlimit
 from tkinter import *
 import time
 from ctypes import windll
-from matplotlib.pyplot import clf, ion, subplots, xlim, ylim
+from matplotlib.pyplot import clf, ion, subplots, xlim, ylim, isinteractive
 import numpy as np
 from matplotlib import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -120,10 +120,14 @@ input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
 # 그래프
 # fig = Figure()
 
+isinteractive()
+
 figure, ax = subplots()
 ax.set_title("포물선 운동 시물레이션", fontproperties=fontprop, fontsize=30)
 ax.set_xlabel("x", fontsize=20)
 ax.set_ylabel("y", fontsize=20)
+
+(line,) = ax.plot([], [])
 
 figure.canvas = FigureCanvasTkAgg(figure, master=graph_frame)
 figure.canvas.draw()
@@ -134,9 +138,7 @@ toolbar.update()
 toolbar.grid(row=1, column=0, sticky="nsew")
 figure.canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
 
-(line,) = ax.plot([], [])
 
-ion()
 # ani = FuncAnimation(fig, para_plot, frames=60, interval=20)
 # canvas.draw()
 
