@@ -3,9 +3,18 @@ from ctypes import windll
 import numpy as np
 from matplotlib import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.backend_bases import key_press_handler
+from matplotlib import font_manager, rc
+import matplotlib.font_manager as fm
 from matplotlib.animation import FuncAnimation
 from matplotlib.figure import Figure
+
+
+# matplotlib font 설정
+path = "Pretendard-Medium.ttf"
+fontprop = fm.FontProperties(fname=path)
+
+params = {"xtick.labelsize": 20, "ytick.labelsize": 20}
+rcParams.update(params)
 
 
 root = Tk()
@@ -62,6 +71,24 @@ info_frame.grid(row=0, column=2, columnspan=2, sticky="nsew")
 # 사용자가 조절할 수 있는 값들의 입력공간이 보일 프레임
 input_frame = Frame(root, width=230, relief="solid", bd=2, bg="white")
 input_frame.grid(row=1, column=2, columnspan=2, sticky="nsew")
+
+
+# 그래프
+fig = Figure()
+
+ax = fig.add_subplot()
+ax.set_title("포물선 운동 시물레이션", fontproperties=fontprop, fontsize=30)
+ax.set_xlabel("x", fontsize=20)
+ax.set_ylabel("y", fontsize=20)
+
+canvas = FigureCanvasTkAgg(fig, master=graph_frame)
+canvas.draw()
+
+toolbar = NavigationToolbar2Tk(canvas, graph_frame, pack_toolbar=False)
+toolbar.update()
+
+toolbar.grid(row=1, column=0, sticky="nsew")
+canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
 
 
 # (발사 후 흐른) 시간 레이블 & 엔트리
@@ -143,6 +170,9 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
+
+graph_frame.grid_rowconfigure(0, weight=1)
+graph_frame.grid_columnconfigure(0, weight=1)
 
 
 root.mainloop()
