@@ -63,16 +63,15 @@ def para_plot(n):
 
     dt = 0
 
-    if n == 0:
-        para_clac()
+    para_clac()
 
-        xlim(0, r + 2)
-        ylim(0, h + 2)
+    xlim(0, r + 2)
+    ylim(0, h + 2)
 
-        figure.canvas.draw()
-        figure.canvas.flush_events()
+    figure.canvas.draw()
+    figure.canvas.flush_events()
 
-    if dt != t[98]:
+    for n in range(100):
         e_t.delete(0, "end")
         dt = t[n]
         e_t.insert(0, dt)
@@ -90,14 +89,8 @@ def para_plot(n):
         line.set_data(parax, paray)
 
         figure.canvas.draw()
-
         figure.canvas.flush_events()
         time.sleep(0.1)
-
-        para_plot(n + 1)
-
-    if dt == t[99]:
-        return
 
 
 def plot():
